@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DarkSoul | Portafolio Completo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #0b0b0f, #000000 80%);
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      background-color: rgba(0,0,0,0.7);
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      text-shadow: 0 0 10px #9c27b0;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(0,0,0,0.7);
+      position: relative;
+      z-index: 10;
+    }
+
+    nav button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      color: #ffffff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background-color: #9c27b0;
+      color: #fff;
+    }
+
+    .tab-content {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .card {
+      background-color: rgba(20, 20, 30, 0.9);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .card h2 {
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .tag {
+      background-color: #ffffff; 
+      color: #000000;            
+      padding: 0.2rem 0.6rem;
+      margin-right: 0.4rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    a {
+      color: #9c27b0;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: rgba(0,0,0,0.7);
+      color: #777;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    #galaxy {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>DarkSoul</h1>
+  <p>Portafolio de configurador de Minecraft</p>
+</header>
+
+<nav></nav>
+
+<section class="tab-content active">
+  <div class="card">
+    <h2>🧪 Sobre mí</h2>
+    <p>Me especializo en BoxPvP, siempre trato de hacer mi mejor trabajo y trato de hacer siempre lo mejor para todos los usuarios que jueguen en tú servidor.</p>
+  </div>
+
+  <div class="card">
+    <h2>🌟 Servidor destacado</h2>
+    <p><strong>⚔️AssaultMc⚔️</strong></p>
+    <p>Una network única que ofrece modalidades como:</p>
+    <span class="tag">SurvivalPvP</span>
+    <span class="tag">WorldBox</span>
+    <span class="tag">FnafBox</span>
+    <span class="tag">FarmBox</span>
+  </div>
+
+  <div class="card">
+    <h2>📩 Contacto</h2>
+    <p>💬 Discord: <strong>dark_soul_asmc</strong></p>
+    <p>📧 Email: <a href="mailto:manuelzambonino2015@gmail.com"><strong>manuelzambonino2015@gmail.com</strong></a></p>
+  </div>
+</section>
+
+<footer>
+  © 2025 DarkSoul | Portafolio Completo
+</footer>
+
+<canvas id="galaxy"></canvas>
+
+<script>
+  const canvas = document.getElementById('galaxy');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  
+  const stars = [];
+  const colors = ['#ffffff', '#ffb6c1', '#add8e6', '#dda0dd', '#87cefa', '#f0e68c'];
+  
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      radius: Math.random() * 1.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      speed: Math.random() * 0.3 + 0.05
+    });
+  }
+  
+  function animateGalaxy() {
+    ctx.clearRect(0, 0, w, h);
+    
+    stars.forEach(star => {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fillStyle = star.color;
+      ctx.fill();
+      star.y += star.speed;
+      if (star.y > h) {
+        star.y = -star.radius;
+        star.x = Math.random() * w;
+        star.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+    });
+    
+    requestAnimationFrame(animateGalaxy);
+  }
+  
+  animateGalaxy();
+</script>
+
+</body>
+</html>
